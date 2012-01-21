@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<fastt>
+	<header description="Main category">
+		<template>very very very very very very very long message</template>
+		<template>pretty message</template>
+		<header description="Subcategory">
+			<template>Message in sybcategory</template>
+			<template>Текст на русском языке</template>
+		</header>
+	</header>
+</fastt>

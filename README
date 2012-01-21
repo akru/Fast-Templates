@@ -1,0 +1,9 @@
+BUILD
+	qmake && make
+
+USE
+	./fastt [config file]
+	Default hotkey Alt + A.
+
+
+Goodluck! Have fun!
