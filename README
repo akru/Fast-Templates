@@ -5,5 +5,8 @@ USE
 	./fastt [config file]
 	Default hotkey Alt + A.
 
+DEPS
+	qt     >= 4.8
+	libqxt >= 0.6
 
 Goodluck! Have fun!
