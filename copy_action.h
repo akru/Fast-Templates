@@ -9,7 +9,8 @@ class CopyAction
 {
     Q_OBJECT
 public:
-    explicit CopyAction(const QString &text, QObject *parent = 0);
+    explicit CopyAction(const QString &name,
+                        const QString &text, QObject *parent = 0);
 
 private slots:
     void copyText();

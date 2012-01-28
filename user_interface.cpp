@@ -30,7 +30,6 @@ void UserInterface::createTrayIconMenu()
 void UserInterface::createMainMenu(const QObjectList &model)
 {
     createMenu(model, mainMenu);
-    mainMenu.setAcceptDrops(true);
 }
 
 void UserInterface::createMenu(const QObjectList &model, QMenu &menu)
@@ -40,13 +39,15 @@ void UserInterface::createMenu(const QObjectList &model, QMenu &menu)
     {
         if ((*it)->children().count())
         {
-            QMenu *submenu = menu.addMenu(((TemplateModel *)(*it))->getText());
+            QMenu *submenu = menu.addMenu(((TemplateModel *)(*it))->getDesc());
             createMenu((*it)->children(), *submenu);
         }
         else
         {
             CopyAction *act =
-                    new CopyAction(((TemplateModel *)(*it))->getText(), &menu);
+                    new CopyAction(
+                        ((TemplateModel *)(*it))->getDesc(),
+                        ((TemplateModel *)(*it))->getText(), &menu);
             menu.addAction(act);
         }
     }

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <fastt>
 	<header description="Main category">
-		<template>very very very very very very very long message</template>
-		<template>pretty message</template>
+		<template description="very long">very very very very very very very long message</template>
+		<template description="pretty">pretty message</template>
 		<header description="Subcategory">
-			<template>Message in sybcategory</template>
-			<template>Текст на русском языке</template>
+			<template description="Mesins">Message in sybcategory</template>
+			<template description="Rus example">Текст на русском языке</template>
 		</header>
 	</header>
 </fastt>

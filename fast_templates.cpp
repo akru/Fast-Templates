@@ -52,17 +52,7 @@ bool FastTemplates::loadConfig(const QString &filename)
         return 1;
     }
 
-    QDomNode node = root.firstChild();
-    while (!node.isNull())
-    {
-        if (node.toElement().tagName() == "header")
-        {
-            _templates << (QObject *) new TemplateModel(
-                              node.toElement().attribute("description", "NaN"));
-            parseHeader(node.toElement(), _templates.last());
-        }
-        node = node.nextSibling();
-    }
+    parseHeader(root, 0);
     return 0;
 }
 
@@ -80,8 +70,13 @@ void FastTemplates::parseHeader(const QDomElement &element, QObject *parent)
         }
         else
         {
-            new TemplateModel(node.toElement().text(), parent);
+            if (node.toElement().tagName() == "template")
+                new TemplateModel(
+                        node.toElement().attribute("description", "NaN"),
+                        parent, node.toElement().text());
         }
+        if (!parent)
+            _templates << templ;
         node = node.nextSibling();
     }
 }

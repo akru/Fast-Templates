@@ -8,15 +8,21 @@ class TemplateModel
         : public QObject
 {
 public:
-    TemplateModel(const QString &text, QObject *parent = 0)
-        : QObject(parent), _text(text)
+    TemplateModel(const QString &description,
+                  QObject *parent = 0, const QString &text = 0)
+        : QObject(parent), _description(description), _text(text)
     {}
-    inline QString & getText()
+    inline const QString & getText()
     {
         return _text;
     }
+    inline const QString & getDesc()
+    {
+        return _description;
+    }
+
 private:
-    QString _text;
+    QString _description, _text;
 };
 
 #endif // TEMPLATE_MODEL_H

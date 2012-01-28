@@ -2,10 +2,9 @@
 #include <QApplication>
 #include <QClipboard>
 
-CopyAction::CopyAction(const QString &text, QObject *parent)
-    : QAction(text.left(40).append("..."), parent)
+CopyAction::CopyAction(const QString &name, const QString &text, QObject *parent)
+    : QAction(name, parent), _text(text)
 {
-    _text = text;
     connect(this, SIGNAL(triggered()), SLOT(copyText()));
 }
 

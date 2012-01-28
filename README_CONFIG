@@ -1,0 +1,12 @@
+fastt config is a XML - file.
+
+Tags:
+	header    :: create new menu, name set in attr description
+	template  :: create new item, name set in attr description
+
+Example:
+<header description="ex_menu">
+	<template description="ex_template">
+		Example text
+	</template>
+</header>
