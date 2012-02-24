@@ -3,11 +3,10 @@
 #include "copy_action.h"
 #include <QObjectList>
 #include <QAction>
+#include <QApplication>
 
 
-
-UserInterface::UserInterface(QWidget *parent)
-    : QWidget(parent)
+UserInterface::UserInterface()
 {
     createTrayIcon();
 }
@@ -29,17 +28,20 @@ void UserInterface::createTrayIconMenu()
 
 void UserInterface::createMainMenu(const QObjectList &model)
 {
+    mainMenu.setWindowFlags(Qt::FramelessWindowHint);
     createMenu(model, mainMenu);
 }
 
 void UserInterface::createMenu(const QObjectList &model, QMenu &menu)
 {
+    QFont bold; bold.setBold(true);
     QObjectList::const_iterator it;
     for (it = model.constBegin(); it != model.constEnd(); ++it)
     {
         if ((*it)->children().count())
         {
             QMenu *submenu = menu.addMenu(((TemplateModel *)(*it))->getDesc());
+            submenu->menuAction()->setFont(bold);
             createMenu((*it)->children(), *submenu);
         }
         else

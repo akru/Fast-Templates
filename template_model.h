@@ -12,11 +12,11 @@ public:
                   QObject *parent = 0, const QString &text = 0)
         : QObject(parent), _description(description), _text(text)
     {}
-    inline const QString & getText()
+    inline const QString & getText() const
     {
         return _text;
     }
-    inline const QString & getDesc()
+    inline const QString & getDesc() const
     {
         return _description;
     }

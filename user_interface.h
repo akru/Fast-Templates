@@ -1,17 +1,16 @@
 #ifndef USER_INTERFACE_H
 #define USER_INTERFACE_H
 
-#include <QWidget>
 #include <QObjectList>
 #include <QSystemTrayIcon>
 #include <QMenu>
 
 class UserInterface
-        : public QWidget
+        : public QObject
 {
     Q_OBJECT
 public:
-    explicit UserInterface(QWidget *parent = 0);
+    explicit UserInterface();
     void createMainMenu(const QObjectList & model);
     
 signals:

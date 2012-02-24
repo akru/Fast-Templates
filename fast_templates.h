@@ -1,11 +1,11 @@
 #ifndef FAST_TEMPLATES_H
 #define FAST_TEMPLATES_H
 
-class UserInterface;
 class QDomElement;
 #include <QApplication>
 #include <QObjectList>
 #include <QxtGui/QxtGui>
+#include "user_interface.h"
 
 
 class FastTemplates
@@ -19,11 +19,11 @@ public:
 private:
     bool loadConfig(const QString &filename);
     void parseHeader(const QDomElement &element, QObject *parent);
-    void connectAll();
+    void connectAll() const;
     void enableHotkey(QString key);
 
-    UserInterface *_gui;
-    QObjectList _templates;
+    UserInterface gui;
+    QObjectList templates;
     QxtGlobalShortcut hotkeyHandle;
 };
 

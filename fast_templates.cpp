@@ -1,21 +1,27 @@
 #include "fast_templates.h"
-#include "user_interface.h"
 #include "template_model.h"
 #include <QtXml>
 
 FastTemplates::FastTemplates(int &ac, char **av)
-    : QApplication(ac, av),
-      _gui(new UserInterface)
+    : QApplication(ac, av)
 {
-    if (arguments().count() != 2)
+    if (arguments().count() != 1)
     {
-        qWarning("Usage: fastt [config]");
-        quick_exit(1);
+        if (arguments().count() > 2)
+        {
+            qWarning("Usage: fastt [config]");
+            quick_exit(1);
+        }
+        if (loadConfig(arguments().at(1)))
+            quick_exit(1);
     }
-    if (loadConfig(arguments().at(1)))
-        quick_exit(1);
+    else
+    {
+        if (loadConfig("/usr/share/fastt/config.xml"))
+            quick_exit(1);
+    }
 
-    _gui->createMainMenu(_templates);
+    gui.createMainMenu(templates);
 
     QString hotKey = "Alt+A";
     enableHotkey(hotKey);
@@ -25,7 +31,7 @@ FastTemplates::FastTemplates(int &ac, char **av)
 
 FastTemplates::~FastTemplates()
 {
-    delete _gui;
+    hotkeyHandle.setEnabled(false);
 }
 
 bool FastTemplates::loadConfig(const QString &filename)
@@ -76,19 +82,19 @@ void FastTemplates::parseHeader(const QDomElement &element, QObject *parent)
                         parent, node.toElement().text());
         }
         if (!parent)
-            _templates << templ;
+            templates << templ;
         node = node.nextSibling();
     }
 }
 
-void FastTemplates::connectAll()
+void FastTemplates::connectAll() const
 {
-    connect(_gui, SIGNAL(closed()), this, SLOT(quit()));
-    connect(&hotkeyHandle, SIGNAL(activated()), _gui, SLOT(showMenu()));
+    connect(&gui, SIGNAL(closed()), this, SLOT(quit()));
+    connect(&hotkeyHandle, SIGNAL(activated()), &gui, SLOT(showMenu()));
 }
 
 void FastTemplates::enableHotkey(QString key)
 {
     hotkeyHandle.setShortcut(QKeySequence(key));
-    hotkeyHandle.setEnabled(true);
+    hotkeyHandle.setEnabled();
 }

@@ -1,4 +1,7 @@
-QT += core gui xml
+QT     += core gui xml
+
+QXT    += core gui
+CONFIG += qxt
 
 TEMPLATE = app
 
@@ -18,8 +21,3 @@ HEADERS += \
 
 RESOURCES += \
     resources.qrc
-
-INCLUDEPATH += /usr/include/QxtCore
-INCLUDEPATH += /usr/include/QxtGui
-
-LIBS  += -lQxtGui -lQxtCore
